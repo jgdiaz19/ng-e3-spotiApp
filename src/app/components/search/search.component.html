@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col">
+    <input #termino type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Buscar artista">
+  </div>
+</div>
+
+<div class="card-columns m-5">
+  <div *ngFor = "let artista of artistas" class="card">
+    <a [href]="artista.external_urls.spotify" target="_blank">
+      <img class="card-img-top" [src]="artista.images | noimage" alt="Ir a la pagina del artista">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">{{artista.name}}</h5>
+      <p class="card-text ">
+        <span *ngFor="let genero of artista.genres" class="badge badge-info ">{{genero}}</span>
+      </p>
+      <div class="d-flex  align-items-center">
+        <div class="p-2">
+          <span class="badge badge-warning">Popularidad:</span>
+        </div>
+        <div class="p-2 flex-fill ">
+          <div class="progress ">
+            <div class="progress-bar bg-success " role="progressbar" [style.width] = "artista.popularity+'%'"
+                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                  {{(artista.popularity/100) | percent}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
